@@ -3,6 +3,7 @@ package main
 import (
 	"server/config"
 	"server/db"
+	"server/server"
 )
 
 func init() {
@@ -11,5 +12,5 @@ func init() {
 }
 
 func main() {
-
+	server.RunServer()
 }
