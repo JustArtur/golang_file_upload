@@ -1,0 +1,6 @@
+.idea
+/tmp
+/server/tmp
+/client/.env.dev
+/server/.env.dev
+
