@@ -22,10 +22,7 @@ func InitEnvs() {
 
 	if err != nil {
 		log.Fatal(err)
-	} else {
-		log.Printf("env: succesfull loaded file: %s", ".env."+env)
 	}
-
 	Envs = loadEnvs()
 }
 

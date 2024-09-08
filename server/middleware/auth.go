@@ -12,7 +12,7 @@ import (
 
 func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		tokenStr := helpers.GetTokenFromRequest(r)
+		tokenStr := r.Header.Get("Authorization")
 
 		token, err := jwt.ValidateJWT(tokenStr)
 		if err != nil {

@@ -44,7 +44,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	helpers.SendResponse(w, http.StatusOK, map[string]string{"access_token": token})
+	helpers.SendResponse(w, http.StatusOK, map[string]string{"token": token})
 }
 
 func Register(w http.ResponseWriter, r *http.Request) {
@@ -53,19 +53,19 @@ func Register(w http.ResponseWriter, r *http.Request) {
 
 	err := helpers.ParseRequest(r, &user)
 	if err != nil {
-		helpers.SendResponse(w, http.StatusBadRequest, err)
+		helpers.SendResponse(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
 	}
 
 	result, _ := models.GetUserByEmail(user.Email)
 	if result != nil {
-		helpers.SendResponse(w, http.StatusBadRequest, fmt.Errorf("user with this email already exists"))
+		helpers.SendResponse(w, http.StatusBadRequest, map[string]string{"error": "user with this email already exists"})
 		return
 	}
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
-		helpers.SendResponse(w, http.StatusInternalServerError, err)
+		helpers.SendResponse(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		return
 	}
 
@@ -74,7 +74,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		Password: string(hashedPassword),
 	})
 	if err != nil {
-		helpers.SendResponse(w, http.StatusInternalServerError, err)
+		helpers.SendResponse(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		return
 	}
 

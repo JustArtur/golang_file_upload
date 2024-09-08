@@ -13,19 +13,7 @@ func SendResponse(w http.ResponseWriter, status int, payload any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 
-	var response any
-
-	if msg, ok := payload.(string); ok {
-		response = map[string]string{"message": msg}
-	} else {
-		response = payload
-	}
-
-	json.NewEncoder(w).Encode(response)
-}
-
-func GetTokenFromRequest(r *http.Request) string {
-	return r.Header.Get("Authorization")
+	json.NewEncoder(w).Encode(payload)
 }
 
 func GetUserIDFromContext(r *http.Request) int {

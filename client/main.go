@@ -1,7 +1,8 @@
 package main
 
 import (
-	"client/config "
+	"client/cmd"
+	"client/config"
 )
 
 func init() {
@@ -9,5 +10,5 @@ func init() {
 }
 
 func main() {
-
+	cmd.Execute()
 }

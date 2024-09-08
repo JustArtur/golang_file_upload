@@ -3,4 +3,6 @@
 /server/tmp
 /client/.env.dev
 /server/.env.dev
+/server/storage
+.DS_Store
 

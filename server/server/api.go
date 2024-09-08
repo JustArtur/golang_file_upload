@@ -27,8 +27,9 @@ func newRoute() *mux.Router {
 
 	apiRouter := router.PathPrefix("/api/v1").Subrouter()
 	apiRouter.Use(middleware.AuthMiddleware)
-	apiRouter.HandleFunc("/upload", controllers.Upload).Methods("POST")
-	apiRouter.HandleFunc("/download/{fileID}", controllers.Download).Methods("GET")
+	apiRouter.HandleFunc("/files", controllers.Upload).Methods("POST")
+	apiRouter.HandleFunc("/files/{fileName}", controllers.Download).Methods("GET")
+	apiRouter.HandleFunc("/files", controllers.Index).Methods("GET")
 
 	return router
 }
